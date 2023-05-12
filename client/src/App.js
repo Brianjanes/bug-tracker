@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./routes/Landing";
 import GlobalStyles from "./GlobalStyles";
+import Bugs from "./routes/Bugs";
 
 const App = () => {
   const { isLoading, error } = useAuth0();
@@ -15,6 +16,7 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/bugs" element={<Bugs />} />
         </Routes>
         {/* {error && <p>Authentication Error</p>}
       {!error && isLoading && <p>Loading...</p>}

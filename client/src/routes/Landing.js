@@ -1,8 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import LoginButton from "../authentication/LoginButton";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const { user } = useAuth0();
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate("/bugs");
+  }
+
   return (
     <Main>
       <LoginButton />
