@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const PORT = 8000;
 
 //handlers being brought in
-const { createTicket } = require("./handlers/tickethandlers.js");
+const { createTicket, getTickets } = require("./handlers/tickethandlers");
 
 const app = express();
 
@@ -18,6 +18,7 @@ app.use(express.static("public"));
 
 //endpoints for tickets
 app.post("/add-ticket", createTicket);
+app.get("/get-tickets", getTickets);
 
 // this is a catch all endpoint.
 app.get("*", (request, response) => {
@@ -27,6 +28,5 @@ app.get("*", (request, response) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`listening on ${PORT}`);
-});
+// Node spins up our server and sets it to listen on port 8000.
+app.listen(8000, () => console.log(`Listening on port 8000`));

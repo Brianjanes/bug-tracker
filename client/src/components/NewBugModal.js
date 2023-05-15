@@ -13,8 +13,7 @@ const NewBugModal = ({ modal, setModal }) => {
   });
 
   const handleInputChange = (e) => {
-    const { name } = e.target;
-    const value = e.target.value;
+    const { name, value } = e.target;
     if (name === "description") {
       setInput({
         ...input,
@@ -52,8 +51,8 @@ const NewBugModal = ({ modal, setModal }) => {
     <Main>
       <Container>
         <InputForm>
+          <InputDescription>description:</InputDescription>
           <DescriptionWrapper>
-            <InputDescriptor>description:</InputDescriptor>
             <UserInput
               type="text"
               name="description"
@@ -62,7 +61,7 @@ const NewBugModal = ({ modal, setModal }) => {
             />
           </DescriptionWrapper>
           <PriorityWrapper>
-            <InputDescriptor>priotiry:</InputDescriptor>
+            <InputPriority>priotiry:</InputPriority>
             <DropdownWrapper
               name="selectList"
               id="selectList"
@@ -82,22 +81,38 @@ const NewBugModal = ({ modal, setModal }) => {
 
 const Main = styled.div`
   width: 500px;
-  height: 500px;
+  height: 300px;
   border: 1px solid lightgray;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-const InputForm = styled.form``;
+const InputForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
-const InputDescriptor = styled.p``;
+const InputDescription = styled.div`
+  font-size: 20px;
+`;
+const InputPriority = styled.div`
+  font-size: 20px;
+  padding-bottom: 20px;
+`;
 
 const UserInput = styled.textarea`
   width: 300px;
   height: 150px;
+  margin: 10px;
+  font-size: 15px;
 `;
 
 const DropdownWrapper = styled.select`
@@ -108,6 +123,7 @@ const DropdownWrapper = styled.select`
 
 const PriorityWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 const DescriptionWrapper = styled.div`
