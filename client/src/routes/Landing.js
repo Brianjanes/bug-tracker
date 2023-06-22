@@ -8,9 +8,9 @@ const Landing = () => {
   const { user } = useAuth0();
   const navigate = useNavigate();
 
-  if (user) {
-    navigate("/bugs");
-  }
+  // if (user) {
+  //   navigate("/bugs");
+  // }
 
   return (
     <Main>

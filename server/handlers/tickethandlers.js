@@ -14,8 +14,10 @@ const database = db.collection("database");
 
 const createTicket = async (request, response) => {
   const { creator, time, description, priority } = request.body;
+
   try {
     await client.connect();
+
     const newTicket = {
       creator,
       time,
@@ -35,20 +37,19 @@ const createTicket = async (request, response) => {
       });
     }
   } catch (error) {
+    console.log(error);
     return response.status(500).json({
       status: 500,
       message: "Internal Server Error.",
     });
-  } finally {
-    client.close();
   }
 };
 
 const getTickets = async (request, response) => {
   try {
-    client.connect();
+    await client.connect();
+
     const tickets = await database.find().toArray();
-    console.log(tickets);
     if (!tickets) {
       return response.status(404).json({
         status: 404,
@@ -61,13 +62,11 @@ const getTickets = async (request, response) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     return response.status(500).json({
       status: 500,
       message: "Internal Server Error.",
     });
-  } finally {
-    client.close();
   }
 };
 

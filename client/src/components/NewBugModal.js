@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FiX } from "react-icons/fi";
 
 const NewBugModal = ({ modal, setModal }) => {
   const { user } = useAuth0();
 
   const [input, setInput] = useState({
     creator: user?.email,
-    time: new Date().toLocaleString(),
+    time: new Date().toDateString(),
     description: "",
     priority: "",
   });
@@ -26,6 +27,11 @@ const NewBugModal = ({ modal, setModal }) => {
         priority: value,
       });
     }
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    setModal(!modal);
   };
 
   const handleNewTicket = (e) => {
@@ -50,6 +56,14 @@ const NewBugModal = ({ modal, setModal }) => {
   return (
     <Main>
       <Container>
+        <ExitDiv>
+          <Xicon
+            onClick={(e) => {
+              handleClose(e);
+            }}
+          />
+        </ExitDiv>
+
         <InputForm>
           <InputDescription>description:</InputDescription>
           <DescriptionWrapper>
@@ -72,25 +86,38 @@ const NewBugModal = ({ modal, setModal }) => {
               <PriorityOption value="low">low</PriorityOption>
             </DropdownWrapper>
           </PriorityWrapper>
-          <button onClick={(e) => handleNewTicket(e)}>submit</button>
         </InputForm>
       </Container>
+      <ButtonDiv>
+        <SubmitButton onClick={(e) => handleNewTicket(e)}>submit</SubmitButton>
+      </ButtonDiv>
     </Main>
   );
 };
 
 const Main = styled.div`
   width: 500px;
-  height: 300px;
-  border: 1px solid lightgray;
+  height: 350px;
+  background-color: lightgray;
+  border: 1px solid black;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
+  margin: 25px;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ExitDiv = styled.div`
+  padding: 10px;
+`;
+const Xicon = styled(FiX)`
+  padding: 10px;
+  float: right;
+  cursor: pointer;
 `;
 
 const InputForm = styled.form`
@@ -101,22 +128,22 @@ const InputForm = styled.form`
 `;
 
 const InputDescription = styled.div`
-  font-size: 20px;
+  font-size: 1rem;
 `;
 const InputPriority = styled.div`
-  font-size: 20px;
+  font-size: 1rem;
   padding-bottom: 20px;
 `;
 
 const UserInput = styled.textarea`
-  width: 300px;
-  height: 150px;
+  width: 350px;
+  height: 125px;
   margin: 10px;
-  font-size: 15px;
+  font-size: 1rem;
 `;
 
 const DropdownWrapper = styled.select`
-  max-width: 50%;
+  max-width: 60%;
   padding: 0.5rem;
   margin-bottom: 1rem;
 `;
@@ -131,4 +158,11 @@ const DescriptionWrapper = styled.div`
   align-items: center;
 `;
 const PriorityOption = styled.option``;
+
+const ButtonDiv = styled.div`
+  padding: 5px;
+`;
+const SubmitButton = styled.button`
+  float: right;
+`;
 export default NewBugModal;

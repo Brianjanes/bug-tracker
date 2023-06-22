@@ -1,6 +1,6 @@
 "use strict";
-const express = require("express");
 const morgan = require("morgan");
+const express = require("express");
 
 const PORT = 8000;
 
@@ -29,4 +29,4 @@ app.get("*", (request, response) => {
 });
 
 // Node spins up our server and sets it to listen on port 8000.
-app.listen(8000, () => console.log(`Listening on port 8000`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
